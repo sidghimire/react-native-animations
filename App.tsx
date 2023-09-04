@@ -1,10 +1,9 @@
-import { View, Text } from 'react-native'
 import React from 'react'
-import SlideToSend from './src/SlideToSend'
+import GlobalTimeSelector from './src/GlobalTimeSelector'
 
 const App = () => {
   return (
-    <SlideToSend/>
+    <GlobalTimeSelector/>
   )
 }
 
