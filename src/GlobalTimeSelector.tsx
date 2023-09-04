@@ -67,7 +67,7 @@ const GlobalTimeSelector = () => {
                 className=' flex-1 flex flex-col'
             >
                 <View className='p-5 mt-10'>
-                <Text className='text-white text-[20px] font-black text-center mb-20'>Los Angeles, CA</Text>
+                <Text className='text-white text-[24px] font-black text-center mb-20'>Los Angeles, CA</Text>
 
                     <Text className='text-gray-200 text-[56px] font-extrabold text-center mt-10'>{localTime}</Text>
 
