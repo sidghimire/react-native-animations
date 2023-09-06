@@ -1,9 +1,10 @@
 import React from 'react'
-import GlobalTimeSelector from './src/GlobalTimeSelector'
+import DynamicIsland from './src/Loading'
+import LoadingAnimationWithFailed from './src/Loading'
 
 const App = () => {
   return (
-    <GlobalTimeSelector/>
+    <LoadingAnimationWithFailed/>
   )
 }
 
