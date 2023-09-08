@@ -91,7 +91,8 @@ const LoadingAnimationWithFailed = () => {
                 end={{ x: 1, y: 1 }}
                 className=' flex-1 flex flex-col'
             >
-                <Animated.View className={'bg-black'} style={[{ top: 370, left: 28, width: 0 }, progressTagStyle]}>
+
+                <Animated.View className={'bg-black'} style={[{ top: 150, left: 28, width: 0 }, progressTagStyle]}>
                     <Animated.View style={[progressTagStyle2]}>
                         <Animated.View style={[progressTagStyle3]}>
                             {warning ?
@@ -101,26 +102,27 @@ const LoadingAnimationWithFailed = () => {
                             }
                             {!warning &&
                                 <View className='absolute w-12 h-12 left-[6px]'>
-                                    <AnimatedText className='text-center my-auto text-white font-bold' editable={false} 
-                                    animatedProps={animatedText} />
+                                    <AnimatedText className='text-center my-auto text-white font-bold' editable={false}
+                                        animatedProps={animatedText} />
                                 </View>
                             }
                         </Animated.View>
                     </Animated.View>
                 </Animated.View>
-
-                <Pressable onPress={() => startAnimation()} className='my-auto'>
+                <Pressable onPress={() => startAnimation()} className='mt-44'>
                     <Animated.View style={[animatedStyle, {
-                        marginTop: 'auto', marginBottom: 'auto', marginLeft: 'auto', marginRight: 'auto'
+                        marginBottom: 'auto', marginLeft: 'auto', marginRight: 'auto'
                     }]}>
                         <Icon name='chevron-down-outline' color={"#0075A2"} size={70} style={{
-                            marginTop: 'auto', marginBottom: 'auto', marginLeft: 'auto', marginRight: 'auto',paddingRight:0,paddingTop:10
+                            marginTop: 'auto', marginBottom: 'auto', marginLeft: 'auto', marginRight: 'auto', paddingRight: 0, paddingTop: 10
                         }} />
 
                         <Animated.View style={[progressStyle]}>
                         </Animated.View>
                     </Animated.View>
                 </Pressable>
+
+
             </LinearGradient>
         </View>
     )
