@@ -1,0 +1,95 @@
+import { View, Text, Pressable, SafeAreaView } from 'react-native'
+import React from 'react'
+import Icon from 'react-native-vector-icons/Ionicons'
+
+const LightControl = () => {
+    return (
+        <SafeAreaView className='flex-1 bg-black flex flex-col'>
+            <View className='flex flex-row'>
+                <Pressable className='mr-auto' >
+                    <Icon name='chevron-back-outline' size={28} color={"#fff"} />
+                </Pressable>
+                <Pressable className='ml-auto' >
+                    <Icon name='add' size={30} color={"#fff"} />
+                </Pressable>
+            </View>
+            <View className='flex flex-row flex-1 py-4'>
+                <View className=' flex flex-col w-7/12'>
+                    <View className='w-full p-3 flex flex-row space-x-3 flex-1'>
+                        <View className='bg-[#d83b5d] w-8 h-8 rounded-full my-auto'></View>
+                        <View className='bg-[#d83b5d] w-full  rounded-xl flex flex-col p-6'>
+                            <Text className='text-white font-light text-[20px]'>Kitchen</Text>
+                            <Text className='text-white font-light text-[12px]'>8 lights</Text>
+                            <View className='flex flex-row flex-wrap mt-2 '>
+                                <Pressable className='w-4 h-4 rounded-full bg-white mr-2 mt-2'></Pressable>
+                                <Pressable className='w-4 h-4 rounded-full bg-white mr-2 mt-2'></Pressable>
+                                <Pressable className='w-4 h-4 rounded-full bg-white mr-2 mt-2'></Pressable>
+                                <Pressable className='w-4 h-4 rounded-full bg-white mr-2 mt-2'></Pressable>
+                                <Pressable className='w-4 h-4 rounded-full bg-white mr-2 mt-2'></Pressable>
+                                <Pressable className='w-4 h-4 rounded-full bg-white mr-2 mt-2'></Pressable>
+                                <Pressable className='w-4 h-4 rounded-full bg-white mr-2 mt-2'></Pressable>
+                                <Pressable className='w-4 h-4 rounded-full bg-white mr-2 mt-2'></Pressable>
+                            </View>
+                        </View>
+                    </View>
+                    <View className='w-full p-3 flex flex-row space-x-3 flex-1'>
+                        <View className='border border-gray-600 w-8 h-8 rounded-full my-auto'></View>
+                        <View className='border-2 border-gray-600 w-full  rounded-xl flex flex-col p-6'>
+                            <Text className='text-white font-light text-[20px]'>Bedroom</Text>
+                            <Text className='text-[#d83b5d] font-light text-[12px]'>8 lights</Text>
+                            <View className='flex flex-row flex-wrap mt-2 '>
+                                <Pressable className='w-4 h-4 rounded-full bg-gray-500 mr-2 mt-2'></Pressable>
+                                <Pressable className='w-4 h-4 rounded-full bg-gray-500 mr-2 mt-2'></Pressable>
+                                <Pressable className='w-4 h-4 rounded-full bg-gray-500 mr-2 mt-2'></Pressable>
+                                <Pressable className='w-4 h-4 rounded-full bg-gray-500 mr-2 mt-2'></Pressable>
+                                <Pressable className='w-4 h-4 rounded-full bg-gray-500 mr-2 mt-2'></Pressable>
+                                <Pressable className='w-4 h-4 rounded-full bg-gray-500 mr-2 mt-2'></Pressable>
+                                <Pressable className='w-4 h-4 rounded-full bg-gray-500 mr-2 mt-2'></Pressable>
+                                <Pressable className='w-4 h-4 rounded-full bg-gray-500 mr-2 mt-2'></Pressable>
+                            </View>
+                        </View>
+                    </View>
+                    <View className='w-full p-3 flex flex-row space-x-3 flex-1'>
+                        <View className='border border-gray-600 w-8 h-8 rounded-full my-auto'></View>
+                        <View className='border-2 border-gray-600 w-full  rounded-xl flex flex-col p-6'>
+                            <Text className='text-white font-light text-[20px]'>Living</Text>
+                            <Text className='text-[#d83b5d] font-light text-[12px]'>8 lights</Text>
+                            <View className='flex flex-row flex-wrap mt-2 '>
+                                <Pressable className='w-4 h-4 rounded-full bg-gray-500 mr-2 mt-2'></Pressable>
+                                <Pressable className='w-4 h-4 rounded-full bg-gray-500 mr-2 mt-2'></Pressable>
+                                <Pressable className='w-4 h-4 rounded-full bg-gray-500 mr-2 mt-2'></Pressable>
+                                <Pressable className='w-4 h-4 rounded-full bg-gray-500 mr-2 mt-2'></Pressable>
+                                <Pressable className='w-4 h-4 rounded-full bg-gray-500 mr-2 mt-2'></Pressable>
+                                <Pressable className='w-4 h-4 rounded-full bg-gray-500 mr-2 mt-2'></Pressable>
+                                <Pressable className='w-4 h-4 rounded-full bg-gray-500 mr-2 mt-2'></Pressable>
+                                <Pressable className='w-4 h-4 rounded-full bg-gray-500 mr-2 mt-2'></Pressable>
+                            </View>
+                        </View>
+                    </View>
+                    <View className='w-full p-3 flex flex-row space-x-3 flex-1'>
+                        <View className='bg-[#d83b5d] w-8 h-8 rounded-full my-auto'></View>
+                        <View className='bg-[#d83b5d] w-full  rounded-xl flex flex-col p-6'>
+                            <Text className='text-white font-light text-[20px]'>Kitchen</Text>
+                            <Text className='text-white font-light text-[12px]'>8 lights</Text>
+                            <View className='flex flex-row flex-wrap mt-2 '>
+                                <Pressable className='w-4 h-4 rounded-full bg-white mr-2 mt-2'></Pressable>
+                                <Pressable className='w-4 h-4 rounded-full bg-white mr-2 mt-2'></Pressable>
+                                <Pressable className='w-4 h-4 rounded-full bg-white mr-2 mt-2'></Pressable>
+                                <Pressable className='w-4 h-4 rounded-full bg-white mr-2 mt-2'></Pressable>
+                                <Pressable className='w-4 h-4 rounded-full bg-white mr-2 mt-2'></Pressable>
+                                <Pressable className='w-4 h-4 rounded-full bg-white mr-2 mt-2'></Pressable>
+                                <Pressable className='w-4 h-4 rounded-full bg-white mr-2 mt-2'></Pressable>
+                                <Pressable className='w-4 h-4 rounded-full bg-white mr-2 mt-2'></Pressable>
+                            </View>
+                        </View>
+                    </View>
+                </View>
+                <View className='flex-1 bg-white'>
+
+                </View>
+            </View>
+        </SafeAreaView>
+    )
+}
+
+export default LightControl
