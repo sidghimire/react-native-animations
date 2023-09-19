@@ -5,11 +5,12 @@ import MusicAppDesign from './src/MusicAppDesign'
 import PercentageSelector from './src/PercentageSelector'
 import { LogBox } from 'react-native'
 import LightControl from './src/LightControl'
+import InfluencerScreen from './src/BicycleSystem'
 
 const App = () => {
   LogBox.ignoreAllLogs()
   return (
-    <LightControl/>
+    <InfluencerScreen/>
   )
 }
 
