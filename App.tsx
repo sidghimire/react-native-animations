@@ -6,11 +6,12 @@ import PercentageSelector from './src/PercentageSelector'
 import { LogBox } from 'react-native'
 import LightControl from './src/LightControl'
 import InfluencerScreen from './src/BicycleSystem'
+import BlurDashboard from './src/BlurDashboard'
 
 const App = () => {
   LogBox.ignoreAllLogs()
   return (
-    <InfluencerScreen/>
+    <BlurDashboard/>
   )
 }
 
