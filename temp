@@ -1,95 +1,168 @@
-import { View, Text, Pressable, SafeAreaView } from 'react-native'
-import React from 'react'
-import Icon from 'react-native-vector-icons/Ionicons'
+import React, { FC, useEffect } from 'react';
+import { View, Text, StyleSheet, Button } from 'react-native';
+import Svg, { Circle } from 'react-native-svg';
+import Animated, {
+    interpolate,
+    useAnimatedProps,
+    useSharedValue,
+    withTiming,
+} from 'react-native-reanimated';
+const data = [
+    {
+        percent: 20,
+        color: '#E5E5FC'
+    },
+    {
+        percent: 30,
+        color: '#F6DECD'
+    },
+    {
+        percent: 10,
+        color: '#fd8a8a'
+    },
+    {
+        percent: 40,
+        color: '#9ea1d4'
+    },
+]
 
-const LightControl = () => {
+type PieChartProps = {
+    size?: number;
+    strokeWidth?: number;
+};
+
+export type PieChartDataItem = {
+    color: string;
+    percent: number;
+};
+
+const AnimatedCircle = Animated.createAnimatedComponent(Circle);
+
+export type PieChartData = PieChartDataItem[];
+
+export const PieChartSegment: FC<{
+    center: number;
+    radius: number;
+    strokeWidth: number;
+    color: string;
+    circumference: number;
+    angle: number;
+    percent: number;
+    progress: Animated.SharedValue<number>;
+}> = ({
+    center,
+    radius,
+    strokeWidth,
+    circumference,
+    color,
+    angle,
+    percent,
+    progress,
+}) => {
+        const animatedProps = useAnimatedProps(() => {
+            const strokeDashoffset = interpolate(
+                progress.value,
+                [0, 1],
+                [circumference, circumference * (1 - percent)],
+            );
+            const rotateAngle = interpolate(progress.value, [0, 1], [0, angle]);
+
+            return {
+                strokeDashoffset,
+                transform: [
+                    { translateX: center },
+                    { translateY: center },
+                    { rotate: `${rotateAngle}deg` },
+                    { translateX: -center },
+                    { translateY: -center },
+                ],
+            };
+        });
+
+        return (
+            <AnimatedCircle
+                cx={center}
+                cy={center}
+                r={radius}
+                strokeWidth={strokeWidth}
+                stroke={color}
+                strokeDasharray={circumference}
+                originX={center}
+                originY={center}
+                // @ts-ignore
+                animatedProps={animatedProps}
+            />
+        );
+    };
+
+export const PieChart = ({ size = 200, strokeWidth = 20 }: PieChartProps) => {
+    const progress = useSharedValue(0);
+    const [data, setData] = React.useState<PieChartData>([]);
+    const [startAngles, setStartAngles] = React.useState<number[]>([]);
+    const center = size / 2;
+    const radius = (size - strokeWidth) / 2;
+    const circumference = 2 * Math.PI * radius;
+
+    const refresh = () => {
+        const generatedData = data;
+
+        let angle = 0;
+        const angles: number[] = [];
+        generatedData.forEach(item => {
+            angles.push(angle);
+            angle += item.percent * 360;
+        });
+
+        setData(generatedData);
+        setStartAngles(angles);
+
+        progress.value = 0;
+        progress.value = withTiming(1, {
+            duration: 1000,
+        });
+    };
+
+    useEffect(() => {
+        refresh();
+        // eslint-disable-next-line react-hooks/exhaustive-deps
+    }, []);
+
     return (
-        <SafeAreaView className='flex-1 bg-black flex flex-col'>
-            <View className='flex flex-row'>
-                <Pressable className='mr-auto' >
-                    <Icon name='chevron-back-outline' size={28} color={"#fff"} />
-                </Pressable>
-                <Pressable className='ml-auto' >
-                    <Icon name='add' size={30} color={"#fff"} />
-                </Pressable>
+        <View>
+            <Text style={styles.titleStyle}>Pie Chart</Text>
+            <View style={[{ width: size, height: size }, styles.rotate]}>
+                <Svg viewBox={`0 0 ${size} ${size}`}>
+                    {data.map((item, index) => (
+                        <PieChartSegment
+                            key={`${item.color}-${index}`}
+                            center={center}
+                            radius={radius}
+                            circumference={circumference}
+                            angle={startAngles[index]}
+                            color={item.color}
+                            percent={item.percent}
+                            strokeWidth={strokeWidth}
+                            progress={progress}
+                        />
+                    ))}
+                </Svg>
             </View>
-            <View className='flex flex-row flex-1 py-4'>
-                <View className=' flex flex-col w-7/12'>
-                    <View className='w-full p-3 flex flex-row space-x-3 flex-1'>
-                        <View className='bg-[#d83b5d] w-8 h-8 rounded-full my-auto'></View>
-                        <View className='bg-[#d83b5d] w-full  rounded-xl flex flex-col p-6'>
-                            <Text className='text-white font-light text-[20px]'>Kitchen</Text>
-                            <Text className='text-white font-light text-[12px]'>8 lights</Text>
-                            <View className='flex flex-row flex-wrap mt-2 '>
-                                <Pressable className='w-4 h-4 rounded-full bg-white mr-2 mt-2'></Pressable>
-                                <Pressable className='w-4 h-4 rounded-full bg-white mr-2 mt-2'></Pressable>
-                                <Pressable className='w-4 h-4 rounded-full bg-white mr-2 mt-2'></Pressable>
-                                <Pressable className='w-4 h-4 rounded-full bg-white mr-2 mt-2'></Pressable>
-                                <Pressable className='w-4 h-4 rounded-full bg-white mr-2 mt-2'></Pressable>
-                                <Pressable className='w-4 h-4 rounded-full bg-white mr-2 mt-2'></Pressable>
-                                <Pressable className='w-4 h-4 rounded-full bg-white mr-2 mt-2'></Pressable>
-                                <Pressable className='w-4 h-4 rounded-full bg-white mr-2 mt-2'></Pressable>
-                            </View>
-                        </View>
-                    </View>
-                    <View className='w-full p-3 flex flex-row space-x-3 flex-1'>
-                        <View className='border border-gray-600 w-8 h-8 rounded-full my-auto'></View>
-                        <View className='border-2 border-gray-600 w-full  rounded-xl flex flex-col p-6'>
-                            <Text className='text-white font-light text-[20px]'>Bedroom</Text>
-                            <Text className='text-[#d83b5d] font-light text-[12px]'>8 lights</Text>
-                            <View className='flex flex-row flex-wrap mt-2 '>
-                                <Pressable className='w-4 h-4 rounded-full bg-gray-500 mr-2 mt-2'></Pressable>
-                                <Pressable className='w-4 h-4 rounded-full bg-gray-500 mr-2 mt-2'></Pressable>
-                                <Pressable className='w-4 h-4 rounded-full bg-gray-500 mr-2 mt-2'></Pressable>
-                                <Pressable className='w-4 h-4 rounded-full bg-gray-500 mr-2 mt-2'></Pressable>
-                                <Pressable className='w-4 h-4 rounded-full bg-gray-500 mr-2 mt-2'></Pressable>
-                                <Pressable className='w-4 h-4 rounded-full bg-gray-500 mr-2 mt-2'></Pressable>
-                                <Pressable className='w-4 h-4 rounded-full bg-gray-500 mr-2 mt-2'></Pressable>
-                                <Pressable className='w-4 h-4 rounded-full bg-gray-500 mr-2 mt-2'></Pressable>
-                            </View>
-                        </View>
-                    </View>
-                    <View className='w-full p-3 flex flex-row space-x-3 flex-1'>
-                        <View className='border border-gray-600 w-8 h-8 rounded-full my-auto'></View>
-                        <View className='border-2 border-gray-600 w-full  rounded-xl flex flex-col p-6'>
-                            <Text className='text-white font-light text-[20px]'>Living</Text>
-                            <Text className='text-[#d83b5d] font-light text-[12px]'>8 lights</Text>
-                            <View className='flex flex-row flex-wrap mt-2 '>
-                                <Pressable className='w-4 h-4 rounded-full bg-gray-500 mr-2 mt-2'></Pressable>
-                                <Pressable className='w-4 h-4 rounded-full bg-gray-500 mr-2 mt-2'></Pressable>
-                                <Pressable className='w-4 h-4 rounded-full bg-gray-500 mr-2 mt-2'></Pressable>
-                                <Pressable className='w-4 h-4 rounded-full bg-gray-500 mr-2 mt-2'></Pressable>
-                                <Pressable className='w-4 h-4 rounded-full bg-gray-500 mr-2 mt-2'></Pressable>
-                                <Pressable className='w-4 h-4 rounded-full bg-gray-500 mr-2 mt-2'></Pressable>
-                                <Pressable className='w-4 h-4 rounded-full bg-gray-500 mr-2 mt-2'></Pressable>
-                                <Pressable className='w-4 h-4 rounded-full bg-gray-500 mr-2 mt-2'></Pressable>
-                            </View>
-                        </View>
-                    </View>
-                    <View className='w-full p-3 flex flex-row space-x-3 flex-1'>
-                        <View className='bg-[#d83b5d] w-8 h-8 rounded-full my-auto'></View>
-                        <View className='bg-[#d83b5d] w-full  rounded-xl flex flex-col p-6'>
-                            <Text className='text-white font-light text-[20px]'>Kitchen</Text>
-                            <Text className='text-white font-light text-[12px]'>8 lights</Text>
-                            <View className='flex flex-row flex-wrap mt-2 '>
-                                <Pressable className='w-4 h-4 rounded-full bg-white mr-2 mt-2'></Pressable>
-                                <Pressable className='w-4 h-4 rounded-full bg-white mr-2 mt-2'></Pressable>
-                                <Pressable className='w-4 h-4 rounded-full bg-white mr-2 mt-2'></Pressable>
-                                <Pressable className='w-4 h-4 rounded-full bg-white mr-2 mt-2'></Pressable>
-                                <Pressable className='w-4 h-4 rounded-full bg-white mr-2 mt-2'></Pressable>
-                                <Pressable className='w-4 h-4 rounded-full bg-white mr-2 mt-2'></Pressable>
-                                <Pressable className='w-4 h-4 rounded-full bg-white mr-2 mt-2'></Pressable>
-                                <Pressable className='w-4 h-4 rounded-full bg-white mr-2 mt-2'></Pressable>
-                            </View>
-                        </View>
-                    </View>
-                </View>
-                <View className='flex-1 bg-white'>
-
-                </View>
+            <View style={styles.buttonWrap}>
+                <Button title="Refresh" onPress={refresh} />
             </View>
-        </SafeAreaView>
-    )
-}
+        </View>
+    );
+};
 
-export default LightControl
+const styles = StyleSheet.create({
+    titleStyle: {
+        alignSelf: 'center',
+        paddingBottom: 20,
+        fontSize: 18,
+        fontWeight: '700',
+    },
+    rotate: {
+        transform: [{ rotateZ: '-90deg' }],
+    },
+    buttonWrap: { marginTop: 20 },
+});

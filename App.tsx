@@ -7,11 +7,12 @@ import { LogBox } from 'react-native'
 import LightControl from './src/LightControl'
 import InfluencerScreen from './src/BicycleSystem'
 import BlurDashboard from './src/BlurDashboard'
+import AnalyticsApp from './src/AnalyticsApp'
 
 const App = () => {
   LogBox.ignoreAllLogs()
   return (
-    <BlurDashboard/>
+    <AnalyticsApp />
   )
 }
 
