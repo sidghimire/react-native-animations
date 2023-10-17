@@ -10,11 +10,12 @@ import BlurDashboard from './src/BlurDashboard'
 import AnalyticsApp from './src/AnalyticsApp'
 import ExpandingView from './src/ExpandingView'
 import Scenary from './src/Scenary'
+import RotatingChair from './src/RotatingChair'
 
 const App = () => {
   LogBox.ignoreAllLogs()
   return (
-    <Scenary />
+    <RotatingChair />
   )
 }
 
