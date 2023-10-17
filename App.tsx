@@ -9,11 +9,12 @@ import InfluencerScreen from './src/BicycleSystem'
 import BlurDashboard from './src/BlurDashboard'
 import AnalyticsApp from './src/AnalyticsApp'
 import ExpandingView from './src/ExpandingView'
+import Scenary from './src/Scenary'
 
 const App = () => {
   LogBox.ignoreAllLogs()
   return (
-    <ExpandingView />
+    <Scenary />
   )
 }
 
